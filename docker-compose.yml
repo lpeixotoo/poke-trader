@@ -1,0 +1,29 @@
+version: "3.7"
+services:
+
+  rails-api:
+    build: .
+    command: bundle exec rails server -p 3000 -b '0.0.0.0'
+    environment:
+      - PORT=3000
+    volumes:
+      - .:/poke-trader
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - db
+
+  db:
+    image: "mongo:4.2.8"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: pokeroot
+      MONGO_INITDB_ROOT_PASSWORD: pokepassword123
+    ports:
+      - "27017:27017"
+    volumes:
+      - "mongodb:/var/lib/mongodb/data"
+
+volumes:
+  mongodb:
