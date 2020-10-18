@@ -4,8 +4,6 @@ services:
   rails-api:
     build: .
     command: rails server -p 3000 -b 0.0.0.0
-    environment:
-      - PORT=3000
     volumes:
       - .:/poke-trader
     ports:
