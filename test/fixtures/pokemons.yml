@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  base_experience: 1
+  height: 1
+  weight: 1
+  sprite: MyString
+  hp_stats: 1
+  attack_stats: 1
+  defense_stats: 1
+
+two:
+  name: MyString
+  base_experience: 1
+  height: 1
+  weight: 1
+  sprite: MyString
+  hp_stats: 1
+  attack_stats: 1
+  defense_stats: 1

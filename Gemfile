@@ -49,3 +49,6 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "mongoid", "~> 7.1"
+
+# PokeApi Wrapper gem
+gem 'poke-api-v2'
