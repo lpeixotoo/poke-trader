@@ -1,4 +1,4 @@
-class PokemonsController < ApplicationController
+class Api::V1::PokemonsController < ApplicationController
   before_action :set_pokemon, only: [:show]
 
   # GET /pokemons
@@ -7,6 +7,7 @@ class PokemonsController < ApplicationController
     @pokemons = Pokemon
       .limit(filter_params[:limit] ? filter_params[:limit] : nil)
       .offset(filter_params[:offset] ? filter_params[:offset] : nil)
+      .only(:name, :base_experience, :height, :weight, :sprite, :hp_stats, :attack_stats, :defense_stats)
     respond_to do |format|
       format.json { render json: @pokemons }
     end

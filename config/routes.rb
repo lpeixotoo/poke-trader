@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  resources :pokemons, :defaults => { :format => 'json' }
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  # Api paths under namespaces
+  namespace :api do
+    namespace :v1 do
+      resources :pokemons, :defaults => { :format => 'json' }
+    end
+  end
+  # Frontend app paths
   root to: 'homepage#index'
+  get '/*path' => 'homepage#index'
 end
