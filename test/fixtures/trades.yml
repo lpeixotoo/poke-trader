@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  created_date: 
+  is_fair: false
+  ash_pokemons: 
+  brock_pokemons: 
+
+two:
+  created_date: 
+  is_fair: false
+  ash_pokemons: 
+  brock_pokemons: 

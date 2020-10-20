@@ -11,5 +11,6 @@ echo "MongoDB started"
 #TODO: Insert any migration/bootstrap script
 
 bundle && yarn
+rails db:seed
 
 exec "$@"
