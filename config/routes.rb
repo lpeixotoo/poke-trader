@@ -8,5 +8,5 @@ Rails.application.routes.draw do
   end
   # Frontend app paths
   root to: 'homepage#index'
-  #get '/*path' => 'homepage#index'
+  get '/*path' => 'homepage#index'
 end

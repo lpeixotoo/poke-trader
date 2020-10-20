@@ -25,7 +25,7 @@ class Api::V1::TradesController < ApplicationController
 
     respond_to do |format|
       if @trade.save
-        format.json { render :show, status: :created, location: @trade }
+        format.json { render json: { status: "Trade Created" }, status: :created }
       else
         format.json { render json: @trade.errors, status: :unprocessable_entity }
       end
