@@ -3,10 +3,22 @@ import { Pokemon } from "./types"
 import { useState, useEffect } from "react"
 import PokemonList from "./PokemonList"
 import TradeSideList from "./TradeSideList"
+import { Api, TRADES_ENDPOINT } from "./Api"
+import Toast from "react-bootstrap/Toast"
+
+type ToastState = {
+  isShow: boolean
+  message: string
+}
 
 const Trade: React.FC = () => {
   const [sideAshPokemons, setSideAshPokemons] = useState<Pokemon[]>([])
   const [sideBrockPokemons, setSideBrockPokemons] = useState<Pokemon[]>([])
+  // Toast states
+  const [showToast, setShowToast] = useState<ToastState>({
+    isShow: false,
+    message: "",
+  })
 
   // add pokemons to side handlers
   const addSideAshHandlerBuilder = (newPokemon: Pokemon) => {
@@ -41,6 +53,40 @@ const Trade: React.FC = () => {
       )
   }
 
+  const handleSubmit = (event) => {
+    event.preventDefault()
+
+    if (sideAshPokemons.length === 0 || sideBrockPokemons.length === 0) {
+      setShowToast({
+        isShow: true,
+        message: "Error: Insert Pokemons on empty side",
+      })
+      return
+    }
+
+    const postData = {
+      is_fair: baseExperienceDifference < 40,
+      //TODO: Change model for proper handling pokemon field. Maybe ObjectOid?
+      ash_pokemons: sideAshPokemons.map((pokemon) => pokemon.name).join(","),
+      brock_pokemons: sideBrockPokemons
+        .map((pokemon) => pokemon.name)
+        .join(","),
+    }
+
+    Api.post(TRADES_ENDPOINT, { trade: postData }).then((response) => {
+      if (response.status === 201) {
+        setSideAshPokemons([])
+        setSideBrockPokemons([])
+        setShowToast({ isShow: true, message: "Trade Completed" })
+      } else {
+        setShowToast({
+          isShow: true,
+          message: "Error when registring trade",
+        })
+      }
+    })
+  }
+
   // base experience calculations variables
   const totalBaseExperienceAsh = sideAshPokemons.reduce(
     (acc, pokemon) => acc + pokemon.base_experience,
@@ -57,6 +103,20 @@ const Trade: React.FC = () => {
   //TODO: Set acceptable difference as config variable
   return (
     <div className="container-fluid">
+      <Toast
+        onClose={() =>
+          setShowToast((prevState) => ({ ...prevState, isShow: false }))
+        }
+        show={showToast.isShow}
+        delay={5000}
+        autohide
+      >
+        <Toast.Header>
+          <strong className="mr-auto">PokeTrade</strong>
+          <small>just now</small>
+        </Toast.Header>
+        <Toast.Body>{showToast.message}</Toast.Body>
+      </Toast>
       <div className="row">
         <div className="col-2">
           <PokemonList
@@ -88,6 +148,9 @@ const Trade: React.FC = () => {
                   removePokemonHandlerBuilder={removeSideBrockHandlerBuilder}
                 />
               </div>
+            </div>
+            <div className="row">
+              <button onClick={handleSubmit}>Trade Pokemons</button>
             </div>
           </div>
         </div>

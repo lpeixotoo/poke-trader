@@ -2,6 +2,7 @@ import * as React from "react"
 import { Pokemon } from "./types"
 import { useState, useEffect } from "react"
 import { IoIosAddCircleOutline } from "react-icons/io"
+import { Api, POKEMON_ENDPOINT } from "./Api"
 
 export type Props = {
   addAshHandlerBuilder: (
@@ -19,9 +20,7 @@ const PokemonList: React.FC<Props> = ({
   const [pokemons, setPokemons] = useState<Pokemon[]>([])
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/v1/pokemons")
-      .then((response) => response.json())
-      .then((response) => setPokemons(response))
+    Api.get(POKEMON_ENDPOINT).then((response) => setPokemons(response.data))
   }, [])
 
   return (
