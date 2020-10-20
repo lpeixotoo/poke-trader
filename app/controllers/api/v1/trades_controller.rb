@@ -4,9 +4,10 @@ class Api::V1::TradesController < ApplicationController
   # GET /trades
   # GET /trades.json
   def index
-    @trades = Trade.all
+    @trades = Trade
+      .only(:created_at, :is_fair, :ash_pokemons, :brock_pokemons)
     respond_to do |format|
-      format.json { render json: @pokemons }
+      format.json { render json: @trades }
     end
   end
 
@@ -14,7 +15,7 @@ class Api::V1::TradesController < ApplicationController
   # GET /trades/1.json
   def show
     respond_to do |format|
-      format.json { render json: @pokemons }
+      format.json { render json: @trade }
     end
   end
 
@@ -40,6 +41,6 @@ class Api::V1::TradesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def trade_params
-      params.require(:trade).permit(:created_date, :is_fair, :ash_pokemons, :brock_pokemons)
+      params.require(:trade).permit(:is_fair, :ash_pokemons, :brock_pokemons)
     end
 end
