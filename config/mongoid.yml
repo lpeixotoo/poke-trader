@@ -1,3 +1,12 @@
+production:
+    clients:
+        default:
+            uri: mongodb+srv://<%= Rails.application.credentials.mongodb[:user] %>:<%= Rails.application.credentials.mongodb[:password]@pokecluster.dpwts.mongodb.net/poke_trader
+        options:
+            auth_source: admin
+            skip_version_check: true
+        safe: true
+
 development:
   # Configure available database clients. (required)
   clients:
