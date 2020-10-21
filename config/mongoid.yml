@@ -1,12 +1,9 @@
 production:
   clients:
     default:
-      #uri: mongodb+srv://<%= Rails.application.credentials.mongodb[:user] %>:<%= Rails.application.credentials.mongodb[:password] %>@pokecluster.dpwts.mongodb.net/poke_trader
       uri: "<%= ENV['MONGODB_URI'] %>"
       options:
-        database: poke_trader
         server_selection_timeout: 5
-        log_level: :info
 
 development:
   # Configure available database clients. (required)
