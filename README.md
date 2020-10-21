@@ -1,24 +1,34 @@
-# README
+Poke Trade
+----------
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Overview
 
-Things you may want to cover:
+Poke Trader is a demo application intended to analyze pokemons trade based
+on its `base experience` info gathered from [PokeAPI](https://github.com/PokeAPI/pokeapi). It leverages 
+Ruby on Rails, MongoDB and React with Typescript for its stack.  
 
-* Ruby version
+# Getting started
 
-* System dependencies
+## How to run
 
-* Configuration
+### Docker
 
-* Database creation
+Currently the application is best deployed through a multi-container setup 
+managed by `docker-compose`.
 
-* Database initialization
+To build and run the application execute the following command:
 
-* How to run the test suite
+```
+docker-compose up --build
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+**Notes**: `-d` option could be used if a run as a daemon is preffered.
 
-* Deployment instructions
+### Checking out Poke Trade
 
-* ...
+In order to access the application access the following URL in your browser:
+
+`http://localhost:3000`
+
+**Notes**: Due to its stack (MongoDB) Poke Trader is not able to deploy within a free tier
+using Heroku.
