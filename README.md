@@ -29,5 +29,18 @@ In order to access the application access the following URL in your browser:
 
 `http://localhost:3000`
 
-**Notes**: Due to its stack (MongoDB) Poke Trader is not able to deploy within a free tier
-using Heroku.
+Currently all available routes for the application is:
+
+- `api/v1`: Api endpoints
+  - `api/v1/pokemons`: [GET] All pokemons
+  - `api/v1/pokemons/<id>`: [GET] Pokemons by its id
+  - `api/v1/trades`: [GET] All trade
+  - `api/v1/trades`: [POST] Insert new Trade by its [model](.app/models/trade.rb)
+  - `api/v1/pokemons/<id>`: [GET] Trades by its id
+
+- `/tradeapp`: UI Route for performing and analysing your pokemon trade
+- `/tradeapp/history`: UI Route for visualizing your trade history
+
+#### Live demo
+
+Poke Trade live demo can be found at: https://lpeixoto-poke-trader.herokuapp.com
